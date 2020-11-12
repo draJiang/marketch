@@ -4,7 +4,7 @@
 
 ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/VYDAr020201026111922.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/VYDAr020201026111922.png)
 
-同时，我改写了一些逻辑，进一步优化文档阅读体验。
+同时，我改写了 `index.html` 的逻辑，进一步优化文档阅读体验。
 
 - 支持拖拽浏览
 
@@ -23,9 +23,9 @@
 
 优化后：
 
-    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png)
+![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png)
 
-    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png)
+![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png)
 
 - 选中节点后，默认定位到顶部
 
@@ -58,5 +58,3 @@ n
 即可
 
 ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/yjJth220201026111408.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/yjJth220201026111408.png)
-
-[index.html](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4a108b75-449c-4c81-9758-1353a7754c81/index.html)
