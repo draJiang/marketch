@@ -1,46 +1,62 @@
-# Marketch
+## 介绍
 
-Marketch is a Sketch plugin that helps you generate html page from Sketch file where you can get measures and CSS styles directly.
+通过 [marketch](https://github.com/tudou527/marketch/releases) 插件导出 Sketch 文档可以获得比较易读的文件目录，方便查看和导航。
 
-![Banner](resource/logo.png)
+![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/VYDAr020201026111922.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/VYDAr020201026111922.png)
 
-## Notice
+同时，我改写了一些逻辑，进一步优化文档阅读体验。
 
-* This plugin requires artboard to work.
+- 支持拖拽浏览
 
-## Preview
+    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/axRDL620201030095447.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/axRDL620201030095447.png)
 
-![preview](resource/preview.png)
+- 剔除无用的「控件」内容
 
-## Demo
+    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/MGKjch20201024141754.jpg](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/MGKjch20201024141754.jpg)
 
-[http://tudou527.github.io/marketch/](http://tudou527.github.io/marketch/)
+- 支持突出显示某个节点
 
-## Install
+    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/LZKZse20201024141944.jpg](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/LZKZse20201024141944.jpg)
 
-### Manual
+- 优化侧边导航样式
+优化前：
 
-1. Download the latest release at: https://github.com/tudou527/marketch/releases
-2. Unzip `marketch.sketchplugin.zip`
-3. Double click `marketch.sketchplugin`
+优化后：
 
-## Usage
+    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png)
 
-* Select pages and artboards in the upper left corner.
-* Select an element to view its location and CSS styles on the right side of the page.
-* Select an element and hover another to see the spacing between them. 
+    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png)
 
-## Contribute
+- 选中节点后，默认定位到顶部
 
-The plugin is in active development, any help would be appreciated.
+## 使用方法
 
-If you believe you have found a bug, please open an issud according to [this template](issue-template.md).
+### 配置
 
-If you want to contribute to our code base, here's a [contribution guide](contribution.md). Feel free to open a pull request.
+打开插件目录
 
-## Thanks
+![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/iJYvQz20201026112102.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/iJYvQz20201026112102.png)
 
-* [MForever78](https://github.com/MForever78)
-* [noyobo](https://github.com/noyobo)
-* [xunuo](https://github.com/xunuo)
-* [rayps](https://github.com/rayps)
+查看包内容
+
+![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/jQH6sg20201026110846.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/jQH6sg20201026110846.png)
+
+进入插件目录
+
+![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/pKBAlt20201026110957.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/pKBAlt20201026110957.png)
+
+下载本文附件的 `index.html` 文件，进行替换
+
+### 突出显示画板
+
+编辑时在画板名称尾部添加字符
+
+```
+n
+```
+
+即可
+
+![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/yjJth220201026111408.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/yjJth220201026111408.png)
+
+[index.html](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4a108b75-449c-4c81-9758-1353a7754c81/index.html)
