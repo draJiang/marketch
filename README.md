@@ -19,13 +19,10 @@
     ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/LZKZse20201024141944.jpg](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/LZKZse20201024141944.jpg)
 
 - 优化侧边导航样式
-优化前：
-
-优化后：
-
-![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png)
-
-![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png)
+    优化前：
+    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png)
+    优化后：
+    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png)
 
 - 选中节点后，默认定位到顶部
 
