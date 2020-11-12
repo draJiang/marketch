@@ -28,22 +28,6 @@
 
 ## 使用方法
 
-### 配置
-
-打开插件目录
-
-![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/iJYvQz20201026112102.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/iJYvQz20201026112102.png)
-
-查看包内容
-
-![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/jQH6sg20201026110846.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/jQH6sg20201026110846.png)
-
-进入插件目录
-
-![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/pKBAlt20201026110957.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/pKBAlt20201026110957.png)
-
-下载本文附件的 `index.html` 文件，进行替换
-
 ### 突出显示画板
 
 编辑时在画板名称尾部添加字符
