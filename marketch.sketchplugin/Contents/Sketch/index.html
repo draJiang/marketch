@@ -359,13 +359,14 @@
     .brand {
       z-index: 13;
       font-family: "AndaleMono";
-      line-height: 60px;
+      line-height: 94px;
       font-size: 18px;
       font-weight: bold;
       display: inline-block;
-      background: #4E96F7;
+      /* background: #4E96F7; */
       width: 160px;
-      text-align: center;
+      /* text-align: center; */
+
     }
 
     .brand a {
@@ -1015,7 +1016,7 @@
 
     .aside {
       position: absolute;
-      top: 0;
+      top: 20px;
       left: 0;
       width: 160px;
       bottom: 0;
@@ -1023,7 +1024,7 @@
       overflow-y: auto;
       color: #fff;
       /* background: #343D50; */
-      height: 96.8%;
+      height: 95%;
       overflow: hidden;
     }
 
@@ -1046,7 +1047,7 @@
       overflow: hidden;
       /* background: #1E2535; */
       text-indent: 15px;
-
+      text-overflow: ellipsis;
       color: rgba(0, 0, 0, .45);
     }
 
@@ -1139,7 +1140,17 @@
       line-height: 40px;
       border-top: 1px solid #E1E1E1;
     }
-    .cursor.moving{background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAiCAMAAAAJbCvNAAABMlBMVEUAAAAAAAA2NjYsLCwCAgIAAAAAAAAMDAwBAQECAgIBAQECAgIBAQEBAQEAAAAAAAAAAAA5OTkgICAICAgAAAAcHBwCAgIAAAAAAAAAAAAAAAAAAABDQ0M8PDwxMTE0NDQVFRUCAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPDw8DAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AAABhYWEcHBz6+vr39/dMTEzs7Oy8vLy4uLhWVlYqKiooKCj09PTw8PC1tbWnp6d2dnZZWVn8/Pzp6enj4+Pd3d3a2trNzc2tra2pqammpqaKioqAgIBzc3NwcHBmZmZdXV1TU1NHR0c+Pj7W1tbR0dHGxsbAwMCampqSkpKPj4+GhoZycnJsbGwkJCTy91wiAAAANnRSTlMAPP7+/ZcN/Pnr487Kv7QlEv7+/fz71jk2GAcE/v7+/fzzpaCUkGZZQTEsIAn826uEg3JtXFGryOxIAAABkElEQVR4AeXS1XLbQBjF8RXIDHbNdiBpOCnDOa4kg2Oww9w2KUPf/xW6s8q2sTXT6X1+t99/NJozK+6lR8ZmRPzDZpxc3sg9y2Sez3aNl+mUsx23TjpzxbJtmnaqMR08ZO8mGuNn4JA8AU75YiXl5ISW5SXwgTwAUGIfcAuM3thpoRnsAJhnC8DcY0gWj3HBmg5qPAdw1nMBfJ9Aai4AQ1aFllzENNcD2jSEsuOkEvyIEB1k44XrEicI6bCigtXoIbzFN5D2PMAbAG4L0im3VVD2AQyOIF3lgeY88MOC9JXBEEkf2rsHwHtLRup749jtikvTQU8Hflkor/hJB00ZdHUwKKwKJRLP70FRh+7ubXDOLRHY4GU4wEE0I7Q1foPyVh4mQeCay1nxx1OeqWC8K6MF4MrCmK/FX/W0PQKCgfr7gLd/ZDvirkiaX3DXRTE381wzHEFp5UvHQPeJmNFImlD8WOJXH35SzFpZGnba7eFPrleK1yMzEQocBtaEWI+R4aC+Va0YRrWm/jm7Uxf/5zeExWvZghlTSgAAAABJRU5ErkJggg==');}
+
+    #brand img {
+      width: 140px;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+
+    .cursor.moving {
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAiCAMAAAAJbCvNAAABMlBMVEUAAAAAAAA2NjYsLCwCAgIAAAAAAAAMDAwBAQECAgIBAQECAgIBAQEBAQEAAAAAAAAAAAA5OTkgICAICAgAAAAcHBwCAgIAAAAAAAAAAAAAAAAAAABDQ0M8PDwxMTE0NDQVFRUCAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPDw8DAwMAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AAABhYWEcHBz6+vr39/dMTEzs7Oy8vLy4uLhWVlYqKiooKCj09PTw8PC1tbWnp6d2dnZZWVn8/Pzp6enj4+Pd3d3a2trNzc2tra2pqammpqaKioqAgIBzc3NwcHBmZmZdXV1TU1NHR0c+Pj7W1tbR0dHGxsbAwMCampqSkpKPj4+GhoZycnJsbGwkJCTy91wiAAAANnRSTlMAPP7+/ZcN/Pnr487Kv7QlEv7+/fz71jk2GAcE/v7+/fzzpaCUkGZZQTEsIAn826uEg3JtXFGryOxIAAABkElEQVR4AeXS1XLbQBjF8RXIDHbNdiBpOCnDOa4kg2Oww9w2KUPf/xW6s8q2sTXT6X1+t99/NJozK+6lR8ZmRPzDZpxc3sg9y2Sez3aNl+mUsx23TjpzxbJtmnaqMR08ZO8mGuNn4JA8AU75YiXl5ISW5SXwgTwAUGIfcAuM3thpoRnsAJhnC8DcY0gWj3HBmg5qPAdw1nMBfJ9Aai4AQ1aFllzENNcD2jSEsuOkEvyIEB1k44XrEicI6bCigtXoIbzFN5D2PMAbAG4L0im3VVD2AQyOIF3lgeY88MOC9JXBEEkf2rsHwHtLRup749jtikvTQU8Hflkor/hJB00ZdHUwKKwKJRLP70FRh+7ubXDOLRHY4GU4wEE0I7Q1foPyVh4mQeCay1nxx1OeqWC8K6MF4MrCmK/FX/W0PQKCgfr7gLd/ZDvirkiaX3DXRTE381wzHEFp5UvHQPeJmNFImlD8WOJXH35SzFpZGnba7eFPrleK1yMzEQocBtaEWI+R4aC+Va0YRrWm/jm7Uxf/5zeExWvZghlTSgAAAABJRU5ErkJggg==');
+    }
+
     .cursor {
       position: absolute;
       display: none;
@@ -1168,12 +1179,13 @@
 </head>
 
 <body>
-  <div id="cursor" class="cursor"
-    style="left: 1224px; top: 140px; width:20px;height:20px;display: none;"></div>
+  <div id="cursor" class="cursor" style="left: 1224px; top: 140px; width:20px;height:20px;display: none;"></div>
   <div class="page" id="page">
     <textarea class="mk-hide">
     <div class="header">
-      <div class="brand" id="brand"><a target="_blank" href="https://github.com/tudou527/marketch">Marketch</a></div>
+      <div class="brand" id="brand">
+        <img src="http://fe.dev.cc.163.com/meishu/other/SVNResources/C-FUN-LOGO-3_03.png" />
+      </div>
       <div class="unit more" id="unit">{UNIT}：<span class="unit-current">Standard</span></div>
       <ul class="dropdown" id="dropdown">
         <li data-value="standard">Standard</li>
@@ -1516,9 +1528,6 @@
         //切换画板
         $("#aside h3").on('click', function (e) {
 
-          //每次点击站点地图的节点时，默认定位到顶部
-          $(".artboard").animate({ "scrollTop": 0 }, 0);
-
           var el = $(this).parent();
           var artboardId = el.attr('data-ab');
           var selectArtData = self.sketchData.artboard[artboardId];
@@ -1537,6 +1546,9 @@
           self.changeLightHouseState();
           //加载目标画板
           self.loadArtboard(selectArtData);
+
+          //每次点击站点地图的节点时，默认定位到顶部
+          $('.artboard').scrollTop(0);
         }).eq(0).click();
 
         $("#unit").on('click', function () {
@@ -2364,9 +2376,9 @@
     xdata.src = 'data.js';
     document.body.appendChild(xdata);
 
-    $('#aside').hover(function(){
+    $('#aside').hover(function () {
       console.log(1)
-    },function(){
+    }, function () {
       console.log(2)
     })
 
@@ -2431,7 +2443,7 @@
         if (event.which == 32) {
           console.log(32)
           // console.log(event)
-          
+
           $('#cursor').show();
           $('.artboard').addClass('moving-screen');
 
