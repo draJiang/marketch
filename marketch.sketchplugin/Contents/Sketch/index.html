@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>交互文档</title>
+  <link rel="icon" href="http://fe.dev.cc.163.com/meishu/other/miniTool/svnHelper/C-FUN-LOGO_10.png">
   <style>
     html,
     body {
@@ -359,11 +360,11 @@
     .brand {
       z-index: 13;
       font-family: "AndaleMono";
-      line-height: 94px;
+      line-height: 90px;
       font-size: 18px;
       font-weight: bold;
       display: inline-block;
-      /* background: #4E96F7; */
+      background: #ffffff;
       width: 160px;
       /* text-align: center; */
 
@@ -435,7 +436,7 @@
 
     .wrap {
       position: relative;
-      margin: 30px 0 0 30px;
+      margin: 0 0 0 30px;
       /* padding: 30px; */
     }
 
@@ -1024,7 +1025,7 @@
       overflow-y: auto;
       color: #fff;
       /* background: #343D50; */
-      height: 95%;
+      /* height: 95%; */
       overflow: hidden;
     }
 
@@ -1141,6 +1142,14 @@
       border-top: 1px solid #E1E1E1;
     }
 
+    /* 画板标题 */
+    .artboardTitle {
+      height: 100px;
+      line-height: 100px;
+      padding-left: 30px;
+      font-size: 24px;
+    }
+
     #brand img {
       width: 140px;
       vertical-align: middle;
@@ -1180,6 +1189,7 @@
 
 <body>
   <div id="cursor" class="cursor" style="left: 1224px; top: 140px; width:20px;height:20px;display: none;"></div>
+  <!-- <div id="cursor" class="cursor" style="left: 1224px; top: 140px; width:20px;height:20px;"></div> -->
   <div class="page" id="page">
     <textarea class="mk-hide">
     <div class="header">
@@ -1209,6 +1219,7 @@
         <a target="_blank" href="https://github.com/tudou527/marketch">Powered by Marketch</a>
       </div>
       <div class="artboard">
+        <div class="artboardTitle" id="artboardTitle"></div>
         <div class="wrap" id="wrap"></div>
       </div>
       <div class="panel" id="panel"></div>
@@ -1549,6 +1560,12 @@
 
           //每次点击站点地图的节点时，默认定位到顶部
           $('.artboard').scrollTop(0);
+
+          //设置画板标题
+          console.log(self.decode(selectArtData.name))
+          // $('.artboardTitle')[0].text(self.decode(selectArtData.name))
+          $('#artboardTitle').text(self.decode(selectArtData.name))
+
         }).eq(0).click();
 
         $("#unit").on('click', function () {
@@ -2381,6 +2398,26 @@
     }, function () {
       console.log(2)
     })
+
+    function setTreeStyle() {
+      document.getElementById('aside').style.height = document.body.clientHeight - document.getElementById('brand').clientHeight - document.getElementById('thankyou').clientHeight + +8 + 'px'
+    }
+
+    //窗口载入时
+    window.onload = function () {
+      //调整目录高度
+      console.log(document.getElementById('brand').clientHeight)
+      console.log(document.body.clientHeight)
+      console.log(document.getElementById('thankyou').clientHeight)
+      setTreeStyle()
+    }
+
+    //窗口大小改变时
+    $(window).resize(function () {
+      //调整目录高度
+      setTreeStyle()
+    });
+
 
     //拖拽画板查看
     $(window)
