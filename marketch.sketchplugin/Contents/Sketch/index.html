@@ -1035,7 +1035,6 @@
     }
 
     /* 取消了鼠标手形 */
-
     .aside h2 {
       position: relative;
       cursor: default;
@@ -1109,14 +1108,17 @@
       /* border-bottom: 1px solid #2b3346; */
     }
 
-    .page-list li li:hover,
     .page-list .art-active {
       border-right: 3px solid #4E96F7;
       /* text-indent: 10px; */
       /* background-color: #414C63; */
-      color: #E1E8EF;
-
+      /* color: #E1E8EF; */
       background-color: #e6f7ff;
+    }
+
+    .page-list .art-active h3,
+    .page-list li li:hover h3 {
+      color: #1890ff;
     }
 
 
@@ -1148,6 +1150,25 @@
       line-height: 100px;
       padding-left: 30px;
       font-size: 24px;
+    }
+
+    /* 画板预览图 */
+    .preview {
+      z-index: 9999;
+      width: 300px;
+      /* border: 1px solid #e1e1e1; */
+      position: absolute;
+      background-color: #ffffff;
+      left: 164px;
+      top: 0px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+      border-radius: 4px;
+      visibility: hidden;
+    }
+
+    .preview img {
+      width: 100%;
+      height: auto;
     }
 
     #brand img {
@@ -1186,6 +1207,7 @@
     }
   </style>
 </head>
+<!-- © -->
 
 <body>
   <div id="cursor" class="cursor" style="left: 1224px; top: 140px; width:20px;height:20px;display: none;"></div>
@@ -1194,7 +1216,7 @@
     <textarea class="mk-hide">
     <div class="header">
       <div class="brand" id="brand">
-        <img src="http://fe.dev.cc.163.com/meishu/other/SVNResources/C-FUN-LOGO-3_03.png" />
+        <img src="http://fe.dev.cc.163.com/meishu/other/SVNResources/C-FUN-LOGO-3_03.png" onerror="imgError()" />
       </div>
       <div class="unit more" id="unit">{UNIT}：<span class="unit-current">Standard</span></div>
       <ul class="dropdown" id="dropdown">
@@ -1213,7 +1235,11 @@
         <label><i></i></label>{SHOWSLICE}
       </div>
     </div>
+    <div class="preview" id="preview">
+      <img src="FC2D0043-CA04-4E48-84CB-1646525E5780/artboard.png" />
+    </div>
     <div class="page-wrap">
+
       <div class="aside" id="aside"></div>
       <div id="thankyou">
         <a target="_blank" href="https://github.com/tudou527/marketch">Powered by Marketch</a>
@@ -1530,7 +1556,7 @@
         //删除控件
         var mylist = document.getElementsByTagName('li')
         for (var i = 0; i < mylist.length; i++) {
-          console.log(mylist[i])
+          // console.log(mylist[i])
           if (mylist[i].getAttribute('data-page') == KJID) {
             mylist[i].parentNode.removeChild(mylist[i])
           }
@@ -1538,11 +1564,10 @@
 
         //切换画板
         $("#aside h3").on('click', function (e) {
-
+          // document.getElementById("preview").style.display = "none"
           var el = $(this).parent();
           var artboardId = el.attr('data-ab');
           var selectArtData = self.sketchData.artboard[artboardId];
-
           $('#aside .page-active').removeClass('page-active');
           $('#aside .art-active').removeClass('art-active');
           el.addClass('art-active');
@@ -1567,6 +1592,64 @@
           $('#artboardTitle').text(self.decode(selectArtData.name))
 
         }).eq(0).click();
+
+        //显示预览图
+        $("#aside h3").hover(function (e) {
+
+          $("#preview img").attr("src", this.parentNode.dataset.ab + "/artboard.png")
+          
+          var thisTop = this.offsetTop
+
+          //图片加载完成后设置样式，否则高度会不准确
+          $("#preview img").on('load', function () {
+
+            var previewDiv = document.getElementById("preview")
+            
+            var windowH = document.body.clientHeight
+            var imgH = $("#preview").outerHeight()
+
+            console.log("windowH:")
+            console.log(windowH)
+            console.log("thisTop:")
+            console.log(thisTop)
+            console.log("imgH:")
+            console.log(imgH)
+            console.log("-------")
+
+            if (imgH > windowH) {
+              previewDiv.style.top = "4px"
+            }
+            else if (imgH < windowH - thisTop) {
+              previewDiv.style.top = thisTop + 80 + "px"
+            } else {
+
+              console.log("imgH>windowH-thisTop")
+              previewDiv.style.top = windowH - imgH - 18 + "px"
+            }
+
+            document.getElementById("preview").style.visibility = "visible"
+          })
+
+
+
+
+
+
+
+          // console.log(document.getElementById("preview").offsetHeight)
+
+
+
+
+
+          // console.log(this.offsetTop)
+          // console.log(document.body.clientHeight)
+
+        }, function (e) {
+          // console.log('hover2')
+          document.getElementById("preview").style.visibility = "hidden"
+          // console.log(e)
+        })
 
         $("#unit").on('click', function () {
           var dropdown = $(this).siblings(".dropdown");
@@ -1835,7 +1918,7 @@
           .on('mousemove', function (e) {
             var el = $(e.target);
             var id = el.attr('id');
-
+            self.layerHover()
             // console.log(e)
             // console.log(this)
             // console.log(this)
@@ -1945,6 +2028,8 @@
           $('#wrap').click();
         });
       },
+
+
 
       //选中图层
       selectedLayer: function () {
@@ -2148,6 +2233,17 @@
 
         $('select').change();
       },
+
+      //hover 图层
+      layerHover: function (e) {
+        // console.log(e)
+        // console.log(this)
+        // var selected = this.cache.selected;
+        // var objectId = selected.attr('id');
+        // var layerData = this.currentAbData[objectId]; //获取 layer 数据
+        // console.log(this.decode(layerData.html))    //文本内容
+      },
+
 
       //格式化css json数据
       formatStyle: function (styleJson) {
@@ -2402,13 +2498,16 @@
     function setTreeStyle() {
       document.getElementById('aside').style.height = document.body.clientHeight - document.getElementById('brand').clientHeight - document.getElementById('thankyou').clientHeight + +8 + 'px'
     }
+    function imgError() {
+      this.onerror = ''
+      console.log('imgerror')
+      $("#brand img").attr("style", "display:none")
+
+    }
 
     //窗口载入时
     window.onload = function () {
       //调整目录高度
-      console.log(document.getElementById('brand').clientHeight)
-      console.log(document.body.clientHeight)
-      console.log(document.getElementById('thankyou').clientHeight)
       setTreeStyle()
     }
 
@@ -2433,7 +2532,6 @@
             top: event.clientY
           });
         //移动鼠标时移动画板
-        console.log('mousemove')
         if (
           //如果内容容器和指针包含下列类名
           $('.artboard').hasClass('moving-screen') &&
