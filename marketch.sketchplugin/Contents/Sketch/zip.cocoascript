@@ -83,11 +83,11 @@ ExportAsZip.prototype = {
 
     scaleBox.setTitle(I18N.SCALEARTBOARD);
     scaleBox.setButtonType(NSSwitchButton);
-    scaleBox.setState(true);
+    scaleBox.setState(false);
 
     exportBox.setTitle(I18N.EXPORTEVERYLAYER);
     exportBox.setButtonType(NSSwitchButton);
-    exportBox.setState(true);
+    exportBox.setState(false);
 
     sourceBox.setTitle(I18N.SAVESKETCHSOURCE);
     sourceBox.setButtonType(NSSwitchButton);
