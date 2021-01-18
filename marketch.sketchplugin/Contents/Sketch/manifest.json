@@ -8,7 +8,7 @@
     {
       "script": "zip.cocoascript",
       "handler" : "onRun",
-      "shortcut": "command shift m",
+      "shortcut": "command shift o",
       "name": "Export as zipFile",
       "identifier": "export"
     },
