@@ -228,7 +228,7 @@ Marketch.prototype = {
       //待处理的画板所在页面id
       var theArtPageId = util.toJSString(theArtPage.objectID());
       //画板目录
-      var artboardPath = NSString.stringWithFormat(@'%@/%@', this.tmpPath.basePath, artboardId);
+      var artboardPath = NSString.stringWithFormat(@'%@/%@', this.tmpPath.basePath.stringByAppendingPathComponent('artboard'), artboardId);
       //画板中的切片保存路径
       var artboardSlicePath = artboardPath.stringByAppendingPathComponent('slice');
 
