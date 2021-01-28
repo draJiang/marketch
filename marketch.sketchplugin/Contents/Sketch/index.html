@@ -1262,7 +1262,7 @@
       </div>
     </div>
     <div class="preview" id="preview">
-      <img src="FC2D0043-CA04-4E48-84CB-1646525E5780/artboard.png" />
+      <img src="" />
     </div>
     <div class="page-wrap">
 
@@ -1677,7 +1677,7 @@
         //显示预览图
         $("#aside h3").hover(function (e) {
 
-          $("#preview img").attr("src", this.parentNode.dataset.ab + "/artboard.png")
+          $("#preview img").attr("src", "artboard/"+this.parentNode.dataset.ab + "/artboard.png")
 
           var thisTop = this.offsetTop
 
@@ -1831,7 +1831,7 @@
           targetEl.attr('class', 'wrap-layer').html(artHtml.join('')).css({
             width: artboard.width,
             height: artboard.height,
-            background: 'url(' + artboard.id + '/artboard.png)'
+            background: 'url(' +'artboard/'+ artboard.id + '/artboard.png)'
           }).appendTo($('#wrap'));
 
           self.resetMask({
@@ -2229,7 +2229,7 @@
           html.push(
             '<dl class="pa-block pa-symbol" data-symbolid="', layerData.symbolId, '">',
             '<dd>',
-            '<span><img height="15" src="', symbolData.id, '/artboard.png" /></span>',
+            '<span><img height="15" src="','artboard/' ,symbolData.id, '/artboard.png" /></span>',
             '<em>', symbolData.name, '</em>',
             '</dd>',
             '</dl>'
