@@ -1299,6 +1299,8 @@
     var KJID = '' //控件的ID,记录控件节点的 ID，通过 ID 删除控件
     var moveData = {} //记录拖拽面板的移动数据
     var mouseData = {} //当前鼠标的位置
+    var scaleID = 3 //画板比例 ID
+    var scaleList = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]//画板比例列表
 
     var Marketch = function (obj) {
       this.cache = {
@@ -1619,6 +1621,9 @@
           //设置 URL 参数，方便分享当前画板
           setUrl(artboardId)
 
+          //设置画板比例
+          setScale(scaleID)
+
           //图层 hover 时
           $(".art-layer").hover(function () {
 
@@ -1794,7 +1799,7 @@
 
               //位置和尺寸都要像左上方移动1px，避免测量准确的问题
               artHtml.push(
-                '<div class="art-layer" data-html="', self.decode(layer.html), '"" id="', layer.id, '" style="',
+                '<div class="art-layer" data-html="', self.decode(layer.html), '"  data-originalWidth="', layerWidth, '"  data-originalHeight="', layerHeight, '"   data-originalLeft="', (layer.x - baseX), '"  data-originalTop="', (layer.y - baseY), '" id="', layer.id, '" style="',
                 'position:absolute;top:', (layer.y - baseY), 'px;',
                 'z-index:', layer.zIndex, ';',
                 'left:', (layer.x - baseX), 'px;',
@@ -1830,7 +1835,7 @@
 
           artHtml.push('</div>');
 
-          targetEl.attr('class', 'wrap-layer').html(artHtml.join('')).css({
+          targetEl.attr('class', 'wrap-layer').attr('data-originalWidth', artboard.width).attr('data-originalHeight', artboard.height).html(artHtml.join('')).css({
             width: artboard.width,
             height: artboard.height,
             background: 'url(' + 'artboard/' + artboard.id + '/artboard.png)'
@@ -1874,7 +1879,7 @@
 
             //位置和尺寸都要像左上方移动1px，避免测量准确的问题
             artHtml.push(
-              '<div class="art-layer" data-html="', self.decode(layer.html), '"" id="', layer.id, '" style="',
+              '<div class="art-layer" data-html="', self.decode(layer.html), '"data-originalWidth="', layerWidth, '"  data-originalHeight="', layerHeight, '"   data-originalLeft="', (layer.x - baseX), '"  data-originalTop="', (layer.y - baseY), '"id="', layer.id, '" style="',
               'position:absolute;top:', (layer.y - baseY + symbolY), 'px;',
               'z-index:', layer.zIndex, ';',
               'left:', (layer.x - baseX + symbolX), 'px;',
@@ -1929,6 +1934,9 @@
       bind: function () {
         var self = this;
         var timer = {};
+
+        document.addEventListener('mousewheel', this.zoomWheel.bind(this), false)
+        document.body.addEventListener('keydown', this.zoom.bind(this), false)
 
         $('#wrap').on('click', function (e) {
           var el = $(e.target);
@@ -2444,6 +2452,68 @@
         }
       },
 
+      // ctrl/cmd+滚动放大缩小
+      zoomWheel: function (event) {
+        if (event.ctrlKey === true || event.metaKey) {
+          console.info('wheel', event.wheelDelta)
+          if (event.wheelDelta > 0) {
+            // mac触摸板 24  鼠标滚轮120
+            // this.bigger(2)
+            console.log('bigger');
+            if (scaleID >= scaleList.length - 1) {
+              scaleID = scaleList.length - 1
+            } else {
+              scaleID += 1
+            }
+            event.preventDefault()
+            setScale(scaleID)
+          } else {
+            // this.smaller(1)
+            console.log('smaller');
+            if (scaleID <= 0) {
+              scaleID = 0
+            } else {
+              scaleID -= 1
+            }
+            event.preventDefault()
+            setScale(scaleID)
+          }
+          event.preventDefault()
+          return false
+        }
+      },
+      // crtl/cmd+ '+/-'放大缩小
+      zoom: function (event) {
+        console.log(event.which);
+        if (
+          (event.ctrlKey || event.metaKey) &&
+          (event.which == 187 || event.which == 189 || event.which == 48)
+        ) {
+          if (event.which == 187) {
+            console.log('bigger');
+            if (scaleID >= scaleList.length - 1) {
+              scaleID = scaleList.length - 1
+            } else {
+              scaleID += 1
+            }
+            event.preventDefault()
+            setScale(scaleID)
+          } else if (event.which == 189) {
+            // this.smaller(1)
+            if (scaleID <= 0) {
+              scaleID = 0
+            } else {
+              scaleID -= 1
+            }
+            event.preventDefault()
+            setScale(scaleID)
+          } else if (event.which == 48) {
+            scaleID = 3
+            setScale(scaleID)
+          }
+        }
+      },
+
       validateNum: function (num) {
         return num < 0 ? parseInt(Math.abs(num), 10) : parseInt(num, 10);
       },
@@ -2568,6 +2638,36 @@
       console.log('imgerror')
       $("#brand img").attr("style", "display:none")
 
+    }
+
+    function setScale(scaleID) {
+      console.log(scaleID);
+      console.log(scaleList[scaleID]);
+
+      var wrapLayerDiv = document.getElementsByClassName('wrap-layer')
+      for (var i = 0; i < wrapLayerDiv.length; i++) {
+        wrapLayerDiv[i].style.width = wrapLayerDiv[i].getAttribute('data-originalWidth') * scaleList[scaleID] + 'px'
+        wrapLayerDiv[i].style.height = wrapLayerDiv[i].getAttribute('data-originalHeight') * scaleList[scaleID] + 'px'
+
+      }
+
+      var artLayerDiv = document.getElementsByClassName('art-layer')
+      for (var j = 0; j < artLayerDiv.length; j++) {
+
+        try {
+          artLayerDiv[j].style.width = artLayerDiv[j].getAttribute('data-originalWidth') * scaleList[scaleID] + 'px'
+        }
+        catch {
+          console.log('erro');
+          console.log(j);
+          console.log(artLayerDiv[j]);
+        }
+
+        artLayerDiv[j].style.height = artLayerDiv[j].getAttribute('data-originalHeight') * scaleList[scaleID] + 'px'
+        artLayerDiv[j].style.left = artLayerDiv[j].getAttribute('data-originalLeft') * scaleList[scaleID] + 'px'
+        artLayerDiv[j].style.top = artLayerDiv[j].getAttribute('data-originalTop') * scaleList[scaleID] + 'px'
+
+      }
     }
 
     //窗口载入时
