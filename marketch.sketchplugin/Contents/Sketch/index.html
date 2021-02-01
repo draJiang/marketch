@@ -2654,14 +2654,7 @@
       var artLayerDiv = document.getElementsByClassName('art-layer')
       for (var j = 0; j < artLayerDiv.length; j++) {
 
-        try {
-          artLayerDiv[j].style.width = artLayerDiv[j].getAttribute('data-originalWidth') * scaleList[scaleID] + 'px'
-        }
-        catch {
-          console.log('erro');
-          console.log(j);
-          console.log(artLayerDiv[j]);
-        }
+        artLayerDiv[j].style.width = artLayerDiv[j].getAttribute('data-originalWidth') * scaleList[scaleID] + 'px'
 
         artLayerDiv[j].style.height = artLayerDiv[j].getAttribute('data-originalHeight') * scaleList[scaleID] + 'px'
         artLayerDiv[j].style.left = artLayerDiv[j].getAttribute('data-originalLeft') * scaleList[scaleID] + 'px'
