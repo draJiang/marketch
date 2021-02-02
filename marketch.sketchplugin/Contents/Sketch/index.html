@@ -1617,9 +1617,8 @@
           //每次点击站点地图的节点时，默认定位到顶部
           $('.artboard').scrollTop(0);
 
-          //设置画板标题
-          console.log(self.decode(selectArtData.name))
-          $('#artboardTitle').text(self.decode(selectArtData.name))
+          //设置画板标题，如果尾部有符号 n 则剔除
+          $('#artboardTitle').text(self.decode(selectArtData.name)[self.decode(selectArtData.name).length-1]=='n'?self.decode(selectArtData.name).slice(0,-1):self.decode(selectArtData.name))
 
           //设置 URL 参数，方便分享当前画板
           setUrl(artboardId)
@@ -1654,7 +1653,7 @@
                 link = document.createElement('a')
                 link.target = '_blank'
                 link.href = urlList[index]
-                link.innerHTML = urlList[index].length > 40 ? urlList[index].substring(0, 40) + '...' : urlList[index]
+                link.innerHTML = urlList[index].length > 50 ? urlList[index].substring(0, 37) + '...' + urlList[index].substring(urlList[index].length-11, urlList[index].length) : urlList[index]
                 tips.appendChild(link)
               }
 
