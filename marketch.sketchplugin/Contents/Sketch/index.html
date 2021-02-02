@@ -1301,6 +1301,7 @@
     var mouseData = {} //当前鼠标的位置
     var scaleID = 3 //画板比例 ID
     var scaleList = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]//画板比例列表
+    var sketchName //文档名称
 
     var Marketch = function (obj) {
       this.cache = {
@@ -1325,6 +1326,8 @@
       this.symbols = {};
       //创建dom(替换I18N)
       this.setup();
+      //文档名称
+      sketchName = obj.sketchData.sketchName;
     };
 
     Marketch.prototype = {
@@ -2665,6 +2668,9 @@
 
     //窗口载入时
     window.onload = function () {
+      //设置页面标题
+      document.title = sketchName.substring(0,sketchName.indexOf('.sketch'))
+      
       //调整目录高度
       setTreeStyle()
 
