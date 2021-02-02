@@ -89,6 +89,8 @@ Marketch.prototype = {
     basePath = this.tmpPath.basePath;
     //预览需要根据是否导出图层为图片选项决定是否显示导出按钮
     this.sketchData.exportEveryLayer = expConfig.layer;
+    //将 sketch 文件名称写入 data.js
+    this.sketchData.sketchName = util.toJSString(doc.displayName());
 
     //从所有画板中过滤出symbol
     loopObj = doc.pages().objectEnumerator();
