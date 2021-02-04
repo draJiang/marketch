@@ -135,6 +135,7 @@ var util = {
   getJSON: function(url){
     var url = [NSURL URLWithString:url];
     var request = [NSMutableURLRequest requestWithURL:url];
+    [request setTimeoutInterval:8];
     var response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     var result = [NSJSONSerialization JSONObjectWithData:response options:nil error:nil];
     return result;
