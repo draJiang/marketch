@@ -91,6 +91,15 @@ Marketch.prototype = {
     this.sketchData.exportEveryLayer = expConfig.layer;
     //将 sketch 文件名称写入 data.js
     this.sketchData.sketchName = util.toJSString(doc.displayName());
+    //记录导出的时间，用于检查是否是最新文档
+    try {
+      var r = util.getJSON('http://10.255.204.222:3300/getTime')
+      this.sketchData.version = util.convertVersion(r.time)
+    }
+    catch(err){
+        //在此处理错误
+        this.sketchData.version = 'error'
+    }
 
     //从所有画板中过滤出symbol
     loopObj = doc.pages().objectEnumerator();
