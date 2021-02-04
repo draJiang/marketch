@@ -86,7 +86,7 @@
       list-style: none;
     }
 
-    496 table {
+    table {
       border-collapse: collapse
     }
 
@@ -1152,6 +1152,22 @@
       font-size: 24px;
     }
 
+    /* 更新提示 */
+    #isNew {
+      margin-left: 30px;
+      border: 1px solid red;
+      width: 200px;
+      background: red;
+      color: #ffffff;
+      padding: 2px;
+      text-align: center;
+      font-size: 12px;
+      position: absolute;
+      border-radius: 2spx 0px 0px 0px;
+      z-index: 9999;
+      display: none;
+    }
+
     /* 画板预览图 */
     .preview {
       z-index: 9999;
@@ -1272,6 +1288,7 @@
       </div>
       <div class="artboard">
         <div class="artboardTitle" id="artboardTitle"></div>
+        <div id="isNew">SVN 存在更新的文档，请及时更新</div>
         <div class="wrap" id="wrap"></div>
       </div>
       <div class="panel" id="panel"></div>
@@ -1302,6 +1319,9 @@
     var scaleID = 3 //画板比例 ID
     var scaleList = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2]//画板比例列表
     var sketchName //文档名称
+    var pageOrder //页面列表
+    var pageData //页面数据
+    var version //文档版本
 
     var Marketch = function (obj) {
       this.cache = {
@@ -1328,6 +1348,13 @@
       this.setup();
       //文档名称
       sketchName = obj.sketchData.sketchName;
+      //页面列表
+      pageOrder = obj.sketchData.pageOrder
+      //页面数据
+      pageData = obj.sketchData.pageData
+      //文档版本
+      version = obj.sketchData.version
+
     };
 
     Marketch.prototype = {
@@ -1618,13 +1645,18 @@
           $('.artboard').scrollTop(0);
 
           //设置画板标题，如果尾部有符号 n 则剔除
-          $('#artboardTitle').text(self.decode(selectArtData.name)[self.decode(selectArtData.name).length-1]=='n'?self.decode(selectArtData.name).slice(0,-1):self.decode(selectArtData.name))
+          $('#artboardTitle').text(self.decode(selectArtData.name)[self.decode(selectArtData.name).length - 1] == 'n' ? self.decode(selectArtData.name).slice(0, -1) : self.decode(selectArtData.name))
 
           //设置 URL 参数，方便分享当前画板
           setUrl(artboardId)
 
           //设置画板比例
           setScale(scaleID)
+          //设置非新文档的提示样式
+          if ($('#isNew').css('display') != 'none') {
+            $('.wrap-layer').css('border', '1px solid red')
+          }
+
 
           //图层 hover 时
           $(".art-layer").hover(function () {
@@ -1653,7 +1685,7 @@
                 link = document.createElement('a')
                 link.target = '_blank'
                 link.href = urlList[index]
-                link.innerHTML = urlList[index].length > 50 ? urlList[index].substring(0, 37) + '...' + urlList[index].substring(urlList[index].length-11, urlList[index].length) : urlList[index]
+                link.innerHTML = urlList[index].length > 50 ? urlList[index].substring(0, 37) + '...' + urlList[index].substring(urlList[index].length - 11, urlList[index].length) : urlList[index]
                 tips.appendChild(link)
               }
 
@@ -2643,8 +2675,6 @@
     }
 
     function setScale(scaleID) {
-      console.log(scaleID);
-      console.log(scaleList[scaleID]);
 
       var wrapLayerDiv = document.getElementsByClassName('wrap-layer')
       for (var i = 0; i < wrapLayerDiv.length; i++) {
@@ -2668,10 +2698,61 @@
     //窗口载入时
     window.onload = function () {
       //设置页面标题
-      document.title = sketchName.substring(0,sketchName.indexOf('.sketch'))
-      
+      document.title = sketchName.substring(0, sketchName.indexOf('.sketch'))
+
       //调整目录高度
       setTreeStyle()
+
+      //检查文档是否为最新
+      var svnURL = ''
+      console.log(pageData);
+      var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+      var objExp = new RegExp(Expression);
+      //寻找页面名称中的 svnURL，从上往下查，只找 1 个
+      for (var i in pageData) {
+        var pageName = decodeURI(pageData[i].name).replace(/%2F/g, '/')
+        pageName = pageName.replace(/%3A/g, ':')
+        console.log(pageName);
+        if (objExp.test(pageName) == true) {
+          console.log(pageName);
+          svnURL = pageName
+          break
+        } else {
+          // console.log('没有找到 URL');
+        }
+        // console.log(decode(pageData[i].name));
+      }
+      
+      //version 是数字 且 version 存在 且 URL 是 SVN 地址
+      if (!isNaN(parseInt(version))&&version!=undefined&&objExp.test(svnURL)&&svnURL.indexOf('svn')>-1){
+        // 如果版本号有效则检查是否是新文档
+        //请服务端判断
+        
+        $.get("http://10.255.204.222:3300/checkUpdate", { 'url': svnURL, 't': version }, function (data) {
+          console.log(data);
+          if (data.isNew == 0) {
+            console.log(data.msg);
+          }
+          else if (data.isNew == 1) {
+            //是最新的文档
+            console.log(data.msg);
+          }
+          else if (data.isNew == 2) {
+            //提示不是最新的文档
+            console.log(data.msg);
+            $('#isNew').css('display', 'inline')
+            $('.wrap-layer').css('border', '1px solid red')
+          }
+           else {
+            console.log(data.msg);
+            
+          }
+        }, "json");
+      }else{
+        // 版本号无效
+        console.log('没有找到 SVN 链接或不存在版本号或版本号无效');
+      }
+      
 
       //获取 URL 参数
       var abID = GetQueryString("ab")
