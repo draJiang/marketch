@@ -1,43 +1,51 @@
-## 介绍
+## 优化点
 
-通过 [marketch](https://github.com/tudou527/marketch/releases) 插件导出 Sketch 文档可以获得比较易读的文件目录，方便查看和导航。
+- 新增：画板预览图
 
-![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/VYDAr020201026111922.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/VYDAr020201026111922.png)
+    ![https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220101824.png](https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220101824.png)
 
-同时，我改写了 `index.html` 的逻辑，进一步优化文档阅读体验。
+- 新增：自动设置页头信息（显示画板名称）
 
-- 支持拖拽浏览
+    ![https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220102023.png](https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220102023.png)
+
+- 新增：如果文本图层中包含 URL ，将自动识别，点击浮层中的链接支持快速访问
+
+    ![https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220102125.png](https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220102125.png)
+
+- 优化：导出文件的目录结构，更加简洁清爽
+
+    ![https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220102642.png](https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220102642.png)
+
+- 新增：支持按住空格键拖拽浏览
 
     ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/axRDL620201030095447.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/axRDL620201030095447.png)
 
-- 剔除无用的「控件」内容
+- 删除：「控件」内容
 
     ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/MGKjch20201024141754.jpg](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/MGKjch20201024141754.jpg)
 
-- 支持突出显示某个节点
-
-    ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/LZKZse20201024141944.jpg](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/LZKZse20201024141944.jpg)
-
 - 优化侧边导航样式
-    
-    优化前：
+优化前：
+
     ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png)
-    
+
     优化后：
+
     ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/Kl129z20201027140609.png)
 
-- 选中节点后，默认定位到顶部
+- 新增：支持突出显示某个节点
 
-## 使用方法
+    需要突出的画板名称后需要增加字母「n」
 
-### 突出显示画板
+    ![https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220102458.png](https://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/20210220102458.png)
 
-编辑时在画板名称尾部添加字符
+- 其他体验细节
+    - 支持通过链接打开特定页面（自动定位）
 
-```
-n
-```
+        旧版本：通过链接只能默认打开首个画板
 
-即可
+        此版本：通过链接可以打开复制链接时所在的画板
 
-![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/yjJth220201026111408.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/yjJth220201026111408.png)
+    - 点击侧边导航，默认定位到页面顶部
+    - 通过 Cmd/Ctrl+加减键放大或缩小图层
+    - 浏览器标签显示 Sketch 源文件的名称
