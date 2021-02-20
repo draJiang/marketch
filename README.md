@@ -25,7 +25,8 @@
     ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/MGKjch20201024141754.jpg](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/MGKjch20201024141754.jpg)
 
 - 优化侧边导航样式
-优化前：
+    
+    优化前：
 
     ![http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png](http://jiangzilong-image.oss-cn-beijing.aliyuncs.com/uPic/SxEoYE20201027115835.png)
 
