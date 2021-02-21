@@ -94,7 +94,7 @@ Marketch.prototype = {
     this.sketchData.sketchName = util.toJSString(doc.displayName());
     //记录导出的时间，用于检查是否是最新文档
     try {
-      var r = util.getJSON('http://10.255.204.222:3300/getTime')
+      var r = util.getJSON('http://10.255.197.211:3300/getTime')
       this.sketchData.version = util.convertVersion(r.time)
     }
     catch(err){
