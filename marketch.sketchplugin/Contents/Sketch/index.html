@@ -2740,7 +2740,7 @@
         // 如果版本号有效则检查是否是新文档
         //请服务端判断
 
-        $.get("http://10.255.204.222:3300/checkUpdate", { 'url': svnURL, 't': version }, function (data) {
+        $.get("http://10.255.197.211:3300/checkUpdate", { 'url': svnURL, 't': version }, function (data) {
           console.log(data);
           if (data.isNew == 0) {
             console.log(data.msg);
