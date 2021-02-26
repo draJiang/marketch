@@ -1727,21 +1727,17 @@
 
         })
 
-                //显示预览图
+        //显示预览图
         $("#aside h3").hover(function (e) {
 
-          var previewDiv = document.getElementById("preview")
+          $("#preview img").attr("src", "artboard/" + this.parentNode.dataset.ab + "/artboard.png")
 
           var thisTop = this.offsetTop
 
-          //显示预览图容器
-          $("#preview img").attr("src", "")
-          document.getElementById("preview").style.visibility = "visible"//显示预览图
-
-          //加载预览图片
-          $("#preview img").attr("src", "artboard/" + this.parentNode.dataset.ab + "/artboard.png")
           //图片加载完成后设置样式，否则高度会不准确
           $("#preview img").on('load', function () {
+
+            var previewDiv = document.getElementById("preview")
 
             var windowH = document.body.clientHeight
             var imgH = $("#preview").outerHeight()
@@ -1764,15 +1760,18 @@
               console.log("imgH>windowH-thisTop")
               previewDiv.style.top = windowH - imgH - 18 + "px"
             }
-            console.log(window.event.srcElement);
-            console.log(document.getElementById('aside').contains(window.event.srcElement));
-            // if(document.getElementById('aside').contains(window.event.srcElement)){
-              
-            // }
-            
+
+            document.getElementById("preview").style.visibility = "visible"//显示预览图
           })
         }, function (e) {
           document.getElementById("preview").style.visibility = "hidden"//隐藏预览图
+        })
+
+        //画板区域 hover
+        $(".artboard").hover(function (e) {
+          console.log('artboard');
+        }, function (e) {
+
         })
         
         $("#unit").on('click', function () {
