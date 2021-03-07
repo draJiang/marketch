@@ -40,6 +40,11 @@ ExportAsZip.prototype = {
 
         // 延迟1s执行，避免阻塞ui
         [coscript scheduleWithInterval:1 jsFunction:function(cinterval) {
+          
+          //自动排序画板，参考：https://github.com/srbsingh3/auto-arrange-artboards-sketch
+          leftToRight()
+
+
           marketch = new Marketch().run({
             layer: expConfig.layer,
             artboard: artboardType,
@@ -139,6 +144,62 @@ ExportAsZip.prototype = {
       return savePanel.URL().path();
     }
   }
+}
+
+function leftToRight() {
+    var sketch = require('sketch');
+    var document = sketch.getSelectedDocument();
+    var page = document.pages;
+    var artboardList = []
+
+    //获取所有页面的所有画板
+    for (var i = 0; i < page.length; i++) {
+        //console.log(page[i].name)
+        if (page[i].name == "控件") {
+            continue
+        }
+
+        for (var j = 0; j < page[i].layers.length; j++) {
+
+            if (page[i].layers[j].type == 'Artboard') {
+                artboardList.push(page[i].layers[j])
+            }
+
+        }
+    }
+
+    // --- Align Artboards ---
+    var myFunction = function (givenArtboard) {
+        for (i = 0; i < artboardList.length; i++) {
+            if (
+                (Math.abs(givenArtboard.frame.y - artboardList[i].frame.y) < givenArtboard.frame.height) &&
+                (Math.abs(givenArtboard.frame.y - artboardList[i].frame.y) < artboardList[i].frame.height)
+                // && (Math.abs(givenArtboard.frame.y - artboards[i].frame.y) != 0)
+            ) {
+                artboardList[i].frame.y = givenArtboard.frame.y;
+            }
+        }
+    }
+
+    artboardList.forEach(myFunction);
+
+    //--- Horizontal Sorting ---
+    var ordered = artboardList.sort(function (a, b) {
+        var compareY = a.frame.y - b.frame.y;
+        if (compareY != 0) {
+            return compareY;
+        } else {
+            return a.frame.x - b.frame.x;
+        }
+    });
+
+    for (var i = 0; i < ordered.length; i++) {
+        //将画板移动到最后
+        ordered[i].moveToBack();
+    }
+
+    //sketch.UI.message('Artboards in your layer-list have been sorted horizontally.');
+
 }
 
 var onRun = function(context){
