@@ -1212,11 +1212,19 @@
       /* white-space: normal;
       word-break: break-all; */
     }
+    
+    .new{
+      color: #1890ff;
+    }
 
     #brand img {
       width: 140px;
       vertical-align: middle;
       margin-left: 10px;
+    }
+
+    .threeLevel {
+      padding-left: 40px;
     }
 
     .cursor.moving {
@@ -1318,7 +1326,7 @@
     var mouseData = {} //当前鼠标的位置
     var asideIsHover = false
     var scaleID = 15 //画板比例 ID
-    var scaleList = [0.2,0.22,0.24,0.26,0.28,0.3,0.32,0.34,0.36,0.38,0.4,0.42,0.44,0.46,0.48,0.5,0.52,0.54,0.56,0.58,0.6,0.62,0.64,0.66,0.68,0.7,0.72,0.74,0.76,0.78,0.8,0.82,0.84,0.86,0.88,0.9,0.92,0.94,0.96,0.98,1.0,1.02,1.04,1.06,1.08,1.1,1.12,1.14,1.16,1.18,1.2,1.22,1.24,1.26,1.28,1.3,1.32,1.34,1.36,1.38,1.4,1.42,1.44,1.46,1.48,1.5,1.52,1.54,1.56,1.58,1.6,1.62,1.64,1.66,1.68,1.7,1.72,1.74,1.76,1.78,1.8,1.82,1.84,1.86,1.88,1.9,1.92,1.94,1.96,1.98,2.0]//画板比例列表
+    var scaleList = [0.2, 0.22, 0.24, 0.26, 0.28, 0.3, 0.32, 0.34, 0.36, 0.38, 0.4, 0.42, 0.44, 0.46, 0.48, 0.5, 0.52, 0.54, 0.56, 0.58, 0.6, 0.62, 0.64, 0.66, 0.68, 0.7, 0.72, 0.74, 0.76, 0.78, 0.8, 0.82, 0.84, 0.86, 0.88, 0.9, 0.92, 0.94, 0.96, 0.98, 1.0, 1.02, 1.04, 1.06, 1.08, 1.1, 1.12, 1.14, 1.16, 1.18, 1.2, 1.22, 1.24, 1.26, 1.28, 1.3, 1.32, 1.34, 1.36, 1.38, 1.4, 1.42, 1.44, 1.46, 1.48, 1.5, 1.52, 1.54, 1.56, 1.58, 1.6, 1.62, 1.64, 1.66, 1.68, 1.7, 1.72, 1.74, 1.76, 1.78, 1.8, 1.82, 1.84, 1.86, 1.88, 1.9, 1.92, 1.94, 1.96, 1.98, 2.0]//画板比例列表
     var sketchName //文档名称
     var pageOrder //页面列表
     var pageData //页面数据
@@ -1587,19 +1595,21 @@
 
                 if (!/^-{1}[^-]*?.*$/.test(artboardName)) {
                   artboardCount++;
-                  // console.log(artboardName.charAt(artboardName.length - 1))
-                  if (artboardName.charAt(artboardName.length - 1) == 'n') {
-                    //突出显示节点
-                    artboardName = artboardName.substring(0, artboardName.length - 1) //剔除尾部的 n 符号
-                    pageListHtml.push(
-                      '<li data-ab="' + artboradData.id + '"><h3 style="color:#4E96F7;" title="' + artboardName + '">' + artboardName + '</h3></li>'
-                      // '<li data-ab="' + artboradData.id + '"><h3 title="' + artboardName + '">' + artboardName + '</h3><span style="color:red;">* </span></li>'
-                    );
-                  } else {
-                    pageListHtml.push(
-                      '<li data-ab="' + artboradData.id + '"><h3 title="' + artboardName + '">' + artboardName + '</h3></li>'
-                    );
-                  }
+
+                  pageListHtml.push('<li data-ab="' + artboradData.id + '"><h3 title="' + artboardName + '">' + artboardName + '</h3></li>')
+
+                  // if (artboardName.charAt(artboardName.length - 1) == 'n') {
+                  //   //突出显示节点
+                  //   artboardName = artboardName.substring(0, artboardName.length - 1) //剔除尾部的 n 符号
+                  //   pageListHtml.push(
+                  //     '<li data-ab="' + artboradData.id + '"><h3 style="color:#4E96F7;" title="' + artboardName + '">' + artboardName + '</h3></li>'
+                  //     // '<li data-ab="' + artboradData.id + '"><h3 title="' + artboardName + '">' + artboardName + '</h3><span style="color:red;">* </span></li>'
+                  //   );
+                  // } else {
+                  //   pageListHtml.push(
+                  //     '<li data-ab="' + artboradData.id + '"><h3 title="' + artboardName + '">' + artboardName + '</h3></li>'
+                  //   );
+                  // }
 
                 }
               }
@@ -1645,8 +1655,14 @@
           //每次点击站点地图的节点时，默认定位到顶部
           $('.artboard').scrollTop(0);
 
-          //设置画板标题，如果尾部有符号 n 则剔除
-          $('#artboardTitle').text(self.decode(selectArtData.name)[self.decode(selectArtData.name).length - 1] == 'n' ? self.decode(selectArtData.name).slice(0, -1) : self.decode(selectArtData.name))
+          //设置画板标题
+          //如果尾部有符号 n 则剔除
+          var abTitle = self.decode(selectArtData.name)[self.decode(selectArtData.name).length - 1] == 'n' ? self.decode(selectArtData.name).slice(0, -1) : self.decode(selectArtData.name)
+          //如果头部有符号 nn 则剔除
+          if (abTitle.indexOf('##') == 0) {
+            abTitle = abTitle.substring(2)
+          }
+          $('#artboardTitle').text(abTitle)
 
           //设置 URL 参数，方便分享当前画板
           setUrl(artboardId)
@@ -1657,7 +1673,6 @@
           if ($('#isNew').css('display') != 'none') {
             $('.wrap-layer').css('border', '1px solid red')
           }
-
 
           var thisZ //记录当前 hover 图层的 z-index
 
@@ -2528,7 +2543,7 @@
             event.preventDefault()
             setScale(scaleID)
           } else {
-            
+
             scaleID -= 1
 
             if (scaleID <= 0) {
@@ -2559,7 +2574,7 @@
             event.preventDefault()
             setScale(scaleID)
           } else if (event.which == 189) {
-            
+
             scaleID -= 8
 
             if (scaleID <= 0) {
@@ -2730,6 +2745,24 @@
       //调整目录高度
       setTreeStyle()
 
+      //设置目录样式
+      var h3List = $('.page-list li h3')
+      var markStr = '##' // 如果画板标题以此字符开头，则定义为三级目录
+      var newStr = 'n'
+      for (var i = 0; i < h3List.length; i++) {
+        // 三级目录
+        if (h3List[i].innerText.indexOf(markStr) == 0) {
+          h3List[i].setAttribute('class', 'threeLevel')
+          h3List[i].innerText = h3List[i].innerText.substring(markStr.length)
+        }
+        // 文档有更新
+        if (h3List[i].innerText.indexOf(newStr) == h3List[i].innerText.length-1) {
+          h3List[i].setAttribute('class', 'new')
+          h3List[i].innerText = h3List[i].innerText.slice(0,h3List[i].innerText.length-newStr.length)
+        }
+
+      }
+
       //检查文档是否为最新
       var svnURL = ''
       console.log(pageData);
@@ -2790,7 +2823,7 @@
         console.log($("li[data-ab=" + abID[0] + "]")[0].children[0]);
       } else {
         //选中首个画板
-        console.log($(".ab-list")[0].children[0].children[0]);
+        // console.log($(".ab-list")[0].children[0].children[0]);
         $(".ab-list")[0].children[0].children[0].click()
       }
     }
