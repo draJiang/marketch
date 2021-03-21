@@ -1212,8 +1212,8 @@
       /* white-space: normal;
       word-break: break-all; */
     }
-    
-    .new{
+
+    .new {
       color: #1890ff;
     }
 
@@ -1331,6 +1331,8 @@
     var pageOrder //页面列表
     var pageData //页面数据
     var version //文档版本
+    var browseScaleID //用户设置的默认浏览比例选项
+    var browseScale //用户设置的默认浏览比例值
 
     var Marketch = function (obj) {
       this.cache = {
@@ -1363,6 +1365,8 @@
       pageData = obj.sketchData.pageData
       //文档版本
       version = obj.sketchData.version
+      //默认浏览比例
+      browseScaleID = obj.sketchData.browseScale
 
     };
 
@@ -2584,7 +2588,8 @@
             event.preventDefault()
             setScale(scaleID)
           } else if (event.which == 48) {
-            scaleID = 15
+            //恢复至默认浏览比例
+            scaleID = browseScale
             setScale(scaleID)
           }
         }
@@ -2742,6 +2747,22 @@
       //设置页面标题
       document.title = sketchName.substring(0, sketchName.indexOf('.sketch'))
 
+      //默认浏览比例
+      switch (browseScaleID) {
+        case 0:
+          browseScale = 15
+          scaleID = browseScale
+          break
+        case 1:
+          browseScale = 30
+          scaleID = browseScale
+          break
+        default:
+          browseScale = 15
+          scaleID = browseScale
+          break
+      }
+
       //调整目录高度
       setTreeStyle()
 
@@ -2756,9 +2777,9 @@
           h3List[i].innerText = h3List[i].innerText.substring(markStr.length)
         }
         // 文档有更新
-        if (h3List[i].innerText.indexOf(newStr) == h3List[i].innerText.length-1) {
+        if (h3List[i].innerText.indexOf(newStr) == h3List[i].innerText.length - 1) {
           h3List[i].setAttribute('class', 'new')
-          h3List[i].innerText = h3List[i].innerText.slice(0,h3List[i].innerText.length-newStr.length)
+          h3List[i].innerText = h3List[i].innerText.slice(0, h3List[i].innerText.length - newStr.length)
         }
 
       }

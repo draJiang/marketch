@@ -37,7 +37,10 @@ var Marketch = function(){
     exportEveryLayer: false,
     //sketch文件名
     sketchName: '',
+    //文档版本号（导出时的时间戳）
     version: '',
+    //文档默认的浏览比例
+    browseScale:0,
     language: I18N.language,
     //页面多语言
     I18N: I18N['MarketchPreview'],
@@ -74,6 +77,7 @@ Marketch.prototype = {
   /**
    * @param expConfig.layer {boolean} 是否导出图层为图片
    * @param expConfig.artboard {string} 导出画板选项: selected|page|all
+   * @param expConfig.browseScale {number} 默认的浏览比例
    * @param expConfig.saveSource {boolean} 是否保存sketch源文件
    * @return
    */
@@ -101,6 +105,8 @@ Marketch.prototype = {
         //在此处理错误
         this.sketchData.version = 'error'
     }
+    //文档默认的浏览比例
+    this.sketchData.browseScale = expConfig.browseScale
 
     //从所有画板中过滤出symbol
     loopObj = doc.pages().objectEnumerator();
