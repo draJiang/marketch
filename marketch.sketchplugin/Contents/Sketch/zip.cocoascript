@@ -42,7 +42,7 @@ ExportAsZip.prototype = {
         [coscript scheduleWithInterval:1 jsFunction:function(cinterval) {
           
           //自动排序画板，参考：https://github.com/srbsingh3/auto-arrange-artboards-sketch
-          leftToRight()
+          //leftToRight()
 
 
           marketch = new Marketch().run({
