@@ -1900,7 +1900,7 @@
 
             //位置和尺寸都要像左上方移动1px，避免测量准确的问题
             artHtml.push(
-              '<div class="art-slice" data-html="', self.decode(layer.html), '"" id="', sliceLayer.id, '" style="',
+              '<div class="art-slice" data-html="', self.decode(sliceLayer.html), '"" id="', sliceLayer.id, '" style="',
               'position:absolute;top:', (sliceLayer.y - baseY), 'px;',
               'z-index:', sliceLayer.zIndex, ';',
               'left:', (sliceLayer.x - baseX), 'px;',
